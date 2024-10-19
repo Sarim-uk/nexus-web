@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/nexus-web/static/css/main.507fdd99.css",
+    "main.js": "/nexus-web/static/js/main.b64d3b90.js",
+    "static/media/img1.png": "/nexus-web/static/media/img1.aa99344d7c1762b9c6bc.png",
+    "static/media/img5.png": "/nexus-web/static/media/img5.bf5c12f73aeb6d100b6d.png",
+    "static/media/img3.png": "/nexus-web/static/media/img3.11361e87361e5faa3943.png",
+    "static/media/img4.png": "/nexus-web/static/media/img4.e7530b9f99ffa1c8a459.png",
+    "index.html": "/nexus-web/index.html",
+    "main.507fdd99.css.map": "/nexus-web/static/css/main.507fdd99.css.map",
+    "main.b64d3b90.js.map": "/nexus-web/static/js/main.b64d3b90.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.507fdd99.css",
+    "static/js/main.b64d3b90.js"
+  ]
+}
