@@ -1,0 +1,29 @@
+.ticker-container {
+    overflow: hidden; /* Hide overflow to create a sliding effect */
+    white-space: nowrap; /* Prevent line breaks */
+    background-color: #f6f6f6; /* Background color */
+    border: 1px solid #ccc; /* Optional: border around the ticker */
+    padding: 10px 0; /* Padding for aesthetics */
+    width: 100%; /* Set width for container */
+  }
+  
+  .ticker {
+    display: inline-flex; /* Use flexbox for horizontal layout */
+    animation: ticker 20s linear infinite; /* Animation for infinite scrolling */
+  }
+  
+  .ticker img {
+    height: 80px; /* Height of images */
+    margin: 0 10px; /* Spacing between images */
+  }
+  
+  /* Animation for ticker */
+  @keyframes ticker {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%); /* Move by half the width of the ticker */
+    }
+  }
+  
