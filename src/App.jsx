@@ -4,9 +4,7 @@ import { Header } from "./components/header";
 import { Features } from "./components/features";
 import { About } from "./components/about";
 import { Services } from "./components/services";
-//import { Gallery } from "./components/gallery";
 import { Testimonials } from "./components/testimonials";
-//import { Team } from "./components/Team";
 import { ImageTicker } from "./components/ImageTicker";
 import { Contact } from "./components/contact";
 import JsonData from "./data/data.json";
@@ -42,10 +40,11 @@ const App = () => {
       <div>
       <ImageTicker images={Tickerimages} />
       </div>
-      { /* <Gallery data={landingPageData.Gallery} /> */ }
       <Testimonials data={landingPageData.Testimonials} />
-      { /* <Team data={landingPageData.Team} /> */ }
-     <Contact data={landingPageData.Contact} /> */
+     <Contact data={landingPageData.Contact} />
+     <div id="footer">
+     <p>Developed by <a href="https://github.com/Sarim-uk" target="_blank">Sarim.uk</a> - All rights reserved Nexus Infinity Solutions Private Limited.</p>
+     </div>
     </div>
   );
 };

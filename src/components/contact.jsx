@@ -146,9 +146,6 @@ export const Contact = (props) => {
                   </button>
                 </a>
               </div>
-              {/* <div style={{ textAlign: "center", marginTop: "30px" }}> */}
-                
-              {/* </div> */}
             </div>
           </div>
           <div className="col-md-3 col-md-offset-1 contact-info">
