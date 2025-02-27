@@ -1,8 +1,14 @@
 import React from "react";
+import { motion } from 'framer-motion';
 
 export const Navigation = (props) => {
   return (
-    <nav id="menu" className="navbar navbar-default navbar-fixed-top">
+    <motion.nav 
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="navbar navbar-default navbar-fixed-top"
+    >
       <div className="container">
         <div className="navbar-header">
           <button
@@ -28,9 +34,14 @@ export const Navigation = (props) => {
         >
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <a href="#features" className="page-scroll">
+              <motion.a 
+                href="#features"
+                className="nav-link"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 Features
-              </a>
+              </motion.a>
             </li>
             <li>
               <a href="#about" className="page-scroll">
@@ -65,6 +76,6 @@ export const Navigation = (props) => {
           </ul>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };

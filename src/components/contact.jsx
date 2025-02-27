@@ -1,6 +1,7 @@
 import { useState } from "react";
 import emailjs from "emailjs-com";
 import React from "react";
+import { motion } from "framer-motion";
 
 const initialState = {
   name: "",
@@ -10,15 +11,20 @@ const initialState = {
 };
 
 export const Contact = (props) => {
-  const [{ name, email, message, phone }, setState] = useState(initialState);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    phone: ''
+  });
   const [notification, setNotification] = useState(""); // State for notification
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setState((prevState) => ({ ...prevState, [name]: value }));
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const clearState = () => setState({ ...initialState });
+  const clearState = () => setFormData({ ...initialState });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,120 +65,134 @@ export const Contact = (props) => {
     textAlign: "center",
   };
 
+  // Updated styles
+  const formStyle = {
+    display: 'grid',
+    gap: '20px',
+    maxWidth: '600px',
+    margin: '0 auto',
+    padding: '20px'
+  };
+
+  const inputGroupStyle = {
+    display: 'grid',
+    gap: '20px',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))'
+  };
+
+  const inputStyle = {
+    width: '100%',
+    padding: '10px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+    fontSize: '16px'
+  };
+
+  const textareaStyle = {
+    ...inputStyle,
+    minHeight: '150px',
+    resize: 'vertical'
+  };
+
+  const submitButtonStyle = {
+    ...whatsappButtonStyle,
+    width: '100%',
+    marginTop: '10px'
+  };
+
   return (
-    <div>
-      <div id="contact">
-        <div className="container">
+    <div id="contact" style={{ padding: '50px 20px', backgroundColor: '#f9f9f9' }}>
+      <div className="container">
+        <div className="row">
           <div className="col-md-8">
-            <div className="row">
-              <div className="section-title">
-                <h2>Get In Touch</h2>
-                <p>
-                  Fill out the form below, and connect with us to open the doors to premium education and avail our discounts!
-                </p>
-              </div>
-              {notification && ( // Conditional rendering of notification
-                <div style={notificationStyle}>
-                  {notification}
-                </div>
-              )}
-              <form name="sentMessage" validate onSubmit={handleSubmit}>
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        className="form-control"
-                        placeholder="Name"
-                        required
-                        onChange={handleChange}
-                        style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px" }} // Added styling
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        className="form-control"
-                        placeholder="Email"
-                        required
-                        onChange={handleChange}
-                        style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px" }} // Added styling
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <input
-                      type="tel" // Changed to "tel" for phone input
-                      id="phone"
-                      name="phone"
-                      className="form-control"
-                      placeholder="Phone Number"
-                      required
-                      onChange={handleChange}
-                      pattern="[0-9]*" // Allows only numbers
-                      style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px" }} // Added styling
-                    />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <textarea
-                    name="message"
-                    id="message"
-                    className="form-control"
-                    rows="4"
-                    placeholder="Message"
-                    required
+            <div className="section-title" style={{ textAlign: 'center', marginBottom: '40px' }}>
+              <h2>Contact Us</h2>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                ease: [0, 0.55, 0.45, 1]
+              }}
+            >
+              <form onSubmit={handleSubmit} style={formStyle}>
+                <div style={inputGroupStyle}>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    value={formData.name}
                     onChange={handleChange}
-                    style={{ border: "1px solid #ccc", borderRadius: "4px", padding: "10px" }} // Added styling
-                  ></textarea>
+                    style={inputStyle}
+                    required
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    style={inputStyle}
+                    required
+                  />
                 </div>
-                <button type="submit" className="btn btn-custom btn-lg">
+                <div style={inputGroupStyle}>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    style={inputStyle}
+                  />
+                </div>
+                <textarea
+                  name="message"
+                  placeholder="Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  style={textareaStyle}
+                  required
+                ></textarea>
+                <button type="submit" style={submitButtonStyle}>
                   Send Message
                 </button>
               </form>
-              <div className="section-title">
-              <h2>Or reach out to us via WhatsApp</h2>
-                <a href="https://wa.me/+447459533146" target="_blank" rel="noopener noreferrer">
-                  <button style={whatsappButtonStyle} className="btn btn-custom btn-lg">
-                    Connect via WhatsApp!
-                  </button>
-                </a>
-              </div>
-            </div>
+            </motion.div>
+            {notification && <div style={notificationStyle}>{notification}</div>}
           </div>
-          <div className="col-md-3 col-md-offset-1 contact-info">
-            <div className="contact-item">
-              <h3>Contact Info</h3>
-              <p>
-                <span>
-                  <i className="fa fa-map-marker"></i> Address
-                </span>
-                {props.data ? props.data.address : "loading"}
+
+          <div className="col-md-4 contact-info" style={{ 
+            padding: '20px',
+            backgroundColor: '#2c3e50', // Added dark background
+            borderRadius: '8px',
+            color: 'white' // Set default text color to white
+          }}>
+            <div className="contact-item" style={{ marginBottom: '30px' }}>
+              <h3 style={{ color: 'white', marginBottom: '15px' }}>Contact Info</h3>
+              <p style={{ marginBottom: '10px' }}>
+                <i className="fa fa-map-marker" style={{ marginRight: '10px' }}></i>
+                {props.data ? props.data.address : "Loading address..."}
+              </p>
+              <p style={{ marginBottom: '10px' }}>
+                <i className="fa fa-phone" style={{ marginRight: '10px' }}></i>
+                {props.data ? props.data.phone : "Loading phone..."}
+              </p>
+              <p style={{ marginBottom: '10px' }}>
+                <i className="fa fa-envelope-o" style={{ marginRight: '10px' }}></i>
+                {props.data ? props.data.email : "Loading email..."}
               </p>
             </div>
-            <div className="contact-item">
-              <p>
-                <span>
-                  <i className="fa fa-phone"></i> Phone
-                </span>{" "}
-                {props.data ? props.data.phone : "loading"}
-              </p>
-            </div>
-            <div className="contact-item">
-              <p>
-                <span>
-                  <i className="fa fa-envelope-o"></i> Email
-                </span>{" "}
-                {props.data ? props.data.email : "loading"}
-              </p>
+            
+            <div className="section-title">
+              <h3 style={{ color: 'white', marginBottom: '15px' }}>Quick Connect</h3>
+              <a href="https://wa.me/+447459533146" target="_blank" rel="noopener noreferrer">
+                <button style={whatsappButtonStyle}>
+                  WhatsApp Chat
+                </button>
+              </a>
             </div>
           </div>
         </div>

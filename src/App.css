@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans&display=swap');
+
+:root {
+  --heading-font: 'Montserrat', sans-serif;
+  --body-font: 'Open Sans', sans-serif;
+  --primary-blue: #052453;     /* Updated to your specified color */
+  --accent-gold: #d4af37;      /* Richer gold from your contact section */
+  --text-light: #ffffff;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 @media screen and (max-width: 400px) {
   #features {
     padding: 20px;
@@ -15,4 +29,128 @@
   #portfolio {
     width: 110%;
   }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px; /* Matches navbar height + offset */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Slide-up animation */
+.slide-up {
+  animation: slideUp 0.8s ease-out both;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Hover effects */
+.feature-card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+/* Add to existing card styles */
+.feature-card, .testimonial-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Update navbar colors */
+.navbar-default {
+  min-height: 42px;
+  padding: 5px 0;
+  background-color: var(--primary-blue) !important;
+  border-bottom: 2px solid var(--accent-gold) !important;
+}
+
+.navbar-brand {
+  padding: 8px 0;
+  font-size: 16px;
+}
+
+.navbar-nav > li > a {
+  padding: 14px 15px !important;
+  font-size: 12px;
+}
+
+.navbar-default .navbar-brand {
+  color: var(--accent-gold) !important;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: var(--accent-gold) !important;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: var(--text-light) !important;
+  background-color: rgba(212, 175, 55, 0.1) !important;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: #FFD700 !important;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #FFD700 !important;
+}
+
+/* Add animation delay to features */
+.feature-card {
+  animation: fadeIn 0.5s ease-out forwards;
+  animation-delay: calc(var(--index) * 0.1s);
+}
+
+/* Mobile menu adjustments */
+@media (max-width: 768px) {
+  .navbar-default {
+    min-height: 38px;
+  }
+  .navbar-nav > li > a {
+    padding: 8px !important;
+  }
+  
+  .navbar-default .navbar-nav > li > a:hover {
+    background-color: #FFD700 !important;
+    color: #1a2a3a !important;
+  }
+}
+
+/* Contact section styles to match */
+#contact {
+  background-color: var(--primary-blue);
+  color: var(--text-light);
+}
+
+.whatsappButtonStyle {
+  background-color: var(--accent-gold);
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+/* Smooth transitions for all animated elements */
+* {
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease, 
+             color 0.3s ease,
+             transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Prevent layout shifts during animations */
+.motion-div {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }

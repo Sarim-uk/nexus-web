@@ -1,0 +1,17 @@
+{
+  "Contact": {
+    "address": "123 Education Street, London, UK",
+    "phone": "+44 7459 533146",
+    "email": "contact@nexusacademy.com"
+  },
+  "Testimonials": [
+    {
+      "name": "John Doe",
+      "text": "Excellent service... (full text)",
+      "img": "path/to/image.jpg",
+      "role": "CEO",
+      "company": "Tech Corp",
+      "rating": 5
+    }
+  ]
+} 
