@@ -10,24 +10,52 @@
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px; /* Increased base font size */
+  line-height: 1.6; /* Improved line height for readability */
+  color: #333; /* Darker text for better contrast */
+  overflow-x: hidden;
+  max-width: 100vw;
+  flex: 1;
+  min-height: 100%;
 }
 
-@media screen and (max-width: 400px) {
-  #features {
-    padding: 20px;
-    width: 111%;
-  }
+@media screen and (max-width: 767px) {
+  #features,
   #about,
   #services,
   #testimonials,
   #team,
   #contact,
   #footer {
-    width: 111%;
+    width: 100% !important;
+    margin-right: 0;
+    padding: 20px 15px !important;
   }
 
   #portfolio {
-    width: 110%;
+    width: 100% !important;
+  }
+
+  body {
+    overflow-x: hidden;
+    position: relative;
+    padding-right: 0 !important;
+  }
+  
+  .container {
+    max-width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  
+  .row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+  
+  [class*="col-"] {
+    padding-right: 15px;
+    padding-left: 15px;
   }
 }
 
@@ -66,67 +94,144 @@ html {
 
 /* Update navbar colors */
 .navbar-default {
-  min-height: 42px;
-  padding: 5px 0;
-  background-color: var(--primary-blue) !important;
-  border-bottom: 2px solid var(--accent-gold) !important;
+  height: 80px;
+  padding: 0 5%;
+  background: rgba(5, 36, 83, 0.98) !important;
+  backdrop-filter: blur(10px);
+  border: none !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
 }
 
 .navbar-brand {
-  padding: 8px 0;
-  font-size: 16px;
+  font-size: 1.8rem !important;
+  color: #c4a43f !important;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  padding: 0.5rem 0 !important;
 }
 
-.navbar-nav > li > a {
-  padding: 14px 15px !important;
-  font-size: 12px;
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
-.navbar-default .navbar-brand {
-  color: var(--accent-gold) !important;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
+/* Navbar Links - Consistent Gold Color */
 .navbar-default .navbar-nav > li > a {
-  color: var(--accent-gold) !important;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
+  color: #c4a43f !important; /* Ensure gold color */
+  font-size: 1.8rem !important; /* Match brand size */
+  padding: 0.8rem 1.5rem !important;
 }
 
-.navbar-default .navbar-nav > li > a:hover {
-  color: var(--text-light) !important;
-  background-color: rgba(212, 175, 55, 0.1) !important;
+/* Hover/Active States */
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li.active > a {
+  color: #e6d17a !important;
+  transform: translateY(-1px);
 }
 
-.navbar-default .navbar-toggle {
-  border-color: #FFD700 !important;
+.navbar-default .navbar-nav > li > a::after {
+  background: #e6d17a;
+  height: 3px;
+  bottom: -5px;
+}
+
+.navbar-toggle {
+  border: none !important;
+  margin: 0 !important;
+  padding: 0.5rem !important;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #FFD700 !important;
+  background-color: #e6d17a !important;
+}
+
+.navbar-toggle:hover .icon-bar {
+  opacity: 0.8;
+  transform: scaleX(1.1);
+}
+
+.navbar-toggle.collapsed .icon-bar:nth-child(2) {
+  transform: translateY(6px);
+}
+
+.navbar-toggle .icon-bar:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.navbar-toggle .icon-bar:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+.navbar-collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.navbar-collapse.in {
+  max-height: 500px; /* Adjust based on your content height */
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .navbar-default {
+    z-index: 1000; /* Ensure menu stays on top */
+  }
+
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(5, 36, 83, 0.98);
+    backdrop-filter: blur(15px);
+    padding: 0 15px;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 0;
+    margin: 0 -15px;
+  }
+
+  .navbar-default .navbar-nav > li > a {
+    color: #c4a43f !important; /* Consistent gold color */
+    font-size: 1.4rem !important; /* Match mobile brand size */
+  }
+
+  .navbar-default .navbar-nav > li:last-child > a {
+    border-bottom: none;
+  }
+
+  .navbar-default .navbar-nav > li > a:hover {
+    color: #e6d17a !important;
+    background: rgba(196, 164, 63, 0.15) !important;
+  }
+
+  .navbar-toggle {
+    order: 2; /* Move toggle to right side */
+  }
+
+  .navbar-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-brand {
+    font-size: 1.4rem !important;
+  }
 }
 
 /* Add animation delay to features */
 .feature-card {
   animation: fadeIn 0.5s ease-out forwards;
   animation-delay: calc(var(--index) * 0.1s);
-}
-
-/* Mobile menu adjustments */
-@media (max-width: 768px) {
-  .navbar-default {
-    min-height: 38px;
-  }
-  .navbar-nav > li > a {
-    padding: 8px !important;
-  }
-  
-  .navbar-default .navbar-nav > li > a:hover {
-    background-color: #FFD700 !important;
-    color: #1a2a3a !important;
-  }
 }
 
 /* Contact section styles to match */
@@ -147,10 +252,337 @@ html {
   transition: background-color 0.3s ease, 
              color 0.3s ease,
              transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Prevent layout shifts during animations */
 .motion-div {
   backface-visibility: hidden;
   transform-style: preserve-3d;
+}
+
+/* Mobile-first media queries */
+@media (min-width: 768px) {
+  /* Desktop-specific styles */
+}
+
+/* Responsive text sizes */
+h1 { 
+  font-size: 2.8rem; 
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+h2 { 
+  font-size: 2.3rem; 
+  line-height: 1.3;
+  margin-bottom: 1.2rem;
+}
+
+h3 { 
+  font-size: 1.8rem; 
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+h4 { 
+  font-size: 1.5rem; 
+  line-height: 1.4;
+  margin-bottom: 0.8rem;
+}
+
+/* Updated paragraph font size to 15px */
+p { 
+  font-size: 15px; 
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+
+/* Section Content Text - updated to 15px */
+.section-content p,
+.feature-text p,
+.about-text p,
+.service-desc p,
+.testimonial-text p {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+
+/* Feature Titles */
+.feature-title h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Service Titles */
+.service-title h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Testimonial Author */
+.testimonial-author {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* List Items */
+ul li, ol li {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+}
+
+/* Button Text */
+.btn, button {
+  font-size: 1.1rem;
+  padding: 12px 24px;
+}
+
+/* Responsive Typography */
+@media (max-width: 767px) {
+  body {
+    font-size: 16px;
+  }
+  
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.9rem; }
+  h3 { font-size: 1.5rem; }
+  h4 { font-size: 1.3rem; }
+  
+  /* Keep paragraph font size consistent at 15px even on mobile */
+  p { font-size: 15px; }
+  
+  .section-content p,
+  .feature-text p,
+  .about-text p,
+  .service-desc p,
+  .testimonial-text p {
+    font-size: 15px;
+  }
+  
+  .feature-title h3,
+  .service-title h3 {
+    font-size: 1.4rem;
+  }
+  
+  .testimonial-author {
+    font-size: 1.1rem;
+  }
+  
+  ul li, ol li {
+    font-size: 1.1rem;
+  }
+  
+  .btn, button {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+/* Improved Section Titles */
+.section-title h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #052453;
+}
+
+/* Enhanced Readability for Specific Sections */
+#features .feature-box,
+#about .about-text,
+#services .service-desc,
+#testimonials .testimonial {
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+
+/* Responsive image ticker */
+.ImageTicker {
+  padding: 1rem 0;
+  img {
+    max-width: 100px;
+    height: auto;
+    @media (min-width: 768px) {
+      max-width: 150px;
+    }
+  }
+}
+
+/* Improved mobile-first styles */
+@media (max-width: 767px) {
+  body {
+    font-size: 16px; /* Base font size for mobile */
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem !important;
+    max-width: 70vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #contact .col-md-4 {
+    margin-top: 2rem;
+  }
+
+  .ImageTicker img {
+    max-width: 80px !important;
+    margin: 0 8px;
+  }
+
+  /* Disable hover effects on mobile */
+  @media (hover: none) {
+    .navbar-nav > li > a:hover {
+      background-color: transparent !important;
+      color: inherit !important;
+    }
+  }
+
+  body {
+    padding-right: 0 !important;
+  }
+  
+  .navbar-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .navbar-toggle {
+    margin-right: 0;
+    padding: 9px 10px !important;
+  }
+
+  /* Fix form container overflow */
+  #contact .col-md-8 {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  /* Remove any residual margin */
+  .row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  section {
+    width: 100vw !important;
+    overflow: hidden !important;
+    padding: 30px 15px !important;
+  }
+  
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .img-responsive {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Remove any horizontal scroll */
+  html {
+    overflow-x: hidden;
+  }
+  
+  body {
+    position: relative;
+    overflow-x: hidden !important;
+  }
+
+  #header {
+    min-height: 80vh;
+    padding-top: 60px;
+  }
+  
+  .ticker {
+    animation-duration: 15s !important;
+  }
+  
+  .ticker img {
+    max-width: 80px !important;
+  }
+}
+
+/* Add touch target sizing */
+button, a[role="button"] {
+  min-width: 48px;
+  min-height: 48px;
+}
+
+/* Prevent zoom on input focus */
+@media screen and (max-width: 767px) {
+  input, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Update image handling */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Add this keyframe rule */
+@keyframes tick {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Update ticker animation */
+.ticker {
+  animation: tick 20s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+#header {
+  flex: 1;
+  min-height: -webkit-fill-available; /* For iOS */
+}
+
+.navbar-brand:hover {
+  color: #e6d17a !important;
+}
+
+/* Form Input Styling Fix */
+.form-control, 
+input[type="text"], 
+input[type="email"], 
+input[type="tel"], 
+textarea {
+  color: #333 !important; /* Dark text for visibility */
+  background-color: #fff !important;
+  border: 1px solid rgba(196, 164, 63, 0.3) !important;
+}
+
+.form-control:focus, 
+input[type="text"]:focus, 
+input[type="email"]:focus, 
+input[type="tel"]:focus, 
+textarea:focus {
+  border-color: #c4a43f !important;
+  box-shadow: 0 0 0 2px rgba(196, 164, 63, 0.2) !important;
+}
+
+/* Form Placeholder Color */
+::placeholder {
+  color: #999 !important;
+  opacity: 1;
 }

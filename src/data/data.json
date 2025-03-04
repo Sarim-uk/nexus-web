@@ -4,7 +4,7 @@
       "paragraph": "Experience Unparalleled Teaching And Personalized Lessons With Our Top-Tier Instructors from around the globe, Ready To Help You Achieve Your Learning Goals. All From the comfort of your own home."
     },
     "About": {
-      "paragraph": "Nexus Academy offers personalized online tutoring for GCSE, IGCSE, and A level students across the UK. Our experienced tutors provide one-on-one lessons designed to boost grades, build confidence, and support students’ unique learning needs, including those with special educational requirements. Learn from the comfort of home and achieve academic excellence with flexible, tailored tutoring sessions at Nexus Academy.",
+      "paragraph": "Nexus Academy offers personalized online tutoring for GCSE, IGCSE, and A level students across the UK. Our experienced tutors provide one-on-one lessons designed to boost grades, build confidence, and support students' unique learning needs, including those with special educational requirements. Learn from the comfort of home and achieve academic excellence with flexible, tailored tutoring sessions at Nexus Academy.",
       "Why": [
         "Expert Online Tutors for GCSE, IGCSE & A Levels",
         "Customized Study Plans for Every Student",
@@ -180,6 +180,13 @@
         "title": "Interactive Learning Environment",
         "text": "Engage in an interactive online learning platform that promotes active participation, making lessons enjoyable and effective."
       }
+    ],
+    "Partners": [
+      { "name": "Partner 1", "img": "img/partners/partner1.png" },
+      { "name": "Partner 2", "img": "img/partners/partner2.png" },
+      { "name": "Partner 3", "img": "img/partners/partner3.png" },
+      { "name": "Partner 4", "img": "img/partners/partner4.png" },
+      { "name": "Partner 5", "img": "img/partners/partner5.png" }
     ]
   }
   

@@ -1,0 +1,93 @@
+.header-root {
+  position: relative;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: visible;
+  border: 2px solid red;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  border: 2px solid orange;
+}
+
+.header-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  height: 100%;
+  align-content: center;
+  border: 2px solid blue;
+}
+
+.header-image-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 66.66%;
+  overflow: visible;
+  min-height: 300px;
+  border: 2px solid #00ff00;
+}
+
+@media (min-width: 768px) {
+  .header-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .header-root {
+    min-height: calc(100svh - 60px); /* Account for navbar height */
+    padding: 20px 15px;
+    margin-top: 60px; /* Push content below fixed navbar */
+  }
+
+  .header-grid {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2rem;
+    height: auto;
+  }
+
+  .header-image-container {
+    max-height: 40svh;
+    min-height: 250px;
+    padding-bottom: 0;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .header-image {
+    object-fit: cover !important;
+    border-radius: 16px;
+  }
+
+  .header-title {
+    font-size: 2rem !important;
+    line-height: 1.2;
+    margin-bottom: 1rem !important;
+  }
+
+  .header-cta {
+    width: auto;
+    display: inline-block;
+    padding: 1rem 2rem !important;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  .header-content {
+    height: 100%;
+    overflow-y: visible;
+    padding-bottom: 0;
+  }
+} 

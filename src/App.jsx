@@ -53,13 +53,13 @@ const App = () => {
       </ScrollAnimation>
       <Services data={landingPageData.Services} />
       <div>
-      <ImageTicker images={Tickerimages} />
+        <ImageTicker images={Tickerimages} data={landingPageData.Partners} />
       </div>
       <Testimonials data={landingPageData.Testimonials} />
-     <Contact data={landingPageData.Contact} />
-     <div id="footer">
-     <p>Developed by <a href="https://github.com/Sarim-uk" target="_blank" rel="noreferrer">Sarim.uk</a> - All rights reserved Nexus Infinity Solutions Private Limited.</p>
-     </div>
+      <Contact data={landingPageData.Contact} />
+      <div id="footer">
+        <p>Developed by <a href="https://github.com/Sarim-uk" target="_blank" rel="noreferrer">Sarim.uk</a> - All rights reserved Nexus Infinity Solutions Private Limited.</p>
+      </div>
     </div>
   );
 };
