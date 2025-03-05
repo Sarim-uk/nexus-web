@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Navigation } from './components/Navigation.jsx';
 import { Header } from './components/Header.jsx';
 import { Features } from './components/Features.jsx';
-import { About } from './components/About.jsx';
-import { Services } from "./components/services";
-import { Testimonials } from "./components/testimonials";
+import { About } from './components/About';
+import { Services } from "./components/Services";
+import { Testimonials } from "./components/Testimonials";
 import { ImageTicker } from "./components/ImageTicker";
 import { Contact } from './components/Contact.jsx';
 import JsonData from "./data/data.json";
@@ -42,21 +42,21 @@ const App = () => {
   return (
     <div>
       <Navigation />
-      <ScrollAnimation>
-        <Header data={landingPageData.Header} />
+      <ScrollAnimation delay={0.1}>
+        <Header data={landingPageData.Header} id="header" />
       </ScrollAnimation>
       <ScrollAnimation delay={0.2}>
-        <Features data={landingPageData.Features} />
+        <Features data={landingPageData.Features} id="features" />
       </ScrollAnimation>
       <ScrollAnimation delay={0.3}>
-        <About data={landingPageData.About} />
+        <About data={landingPageData.About} id="about" />
       </ScrollAnimation>
-      <Services data={landingPageData.Services} />
+      <Services data={landingPageData.Services} id="services" />
       <div>
         <ImageTicker images={Tickerimages} data={landingPageData.Partners} />
       </div>
-      <Testimonials data={landingPageData.Testimonials} />
-      <Contact data={landingPageData.Contact} />
+      <Testimonials data={landingPageData.Testimonials} id="testimonials" />
+      <Contact data={landingPageData.Contact} id="contact" />
       <div id="footer" style={{ 
         backgroundColor: '#052453',
         color: 'white',

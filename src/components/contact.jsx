@@ -10,7 +10,7 @@ const initialState = {
   phone: "", // Added phone number field
 };
 
-export const Contact = (props) => {
+export const Contact = ({ data, id }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -169,250 +169,252 @@ export const Contact = (props) => {
   };
 
   return (
-    <div id="contact" style={{ padding: '50px 20px', backgroundColor: '#f9f9f9' }}>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-7">
-            <div className="section-title" style={{ textAlign: 'center', marginBottom: '40px' }}>
-              <h2>Contact Us</h2>
-            </div>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.6,
-                ease: [0, 0.55, 0.45, 1]
-              }}
-            >
-              <form onSubmit={handleSubmit} className="contact-form">
-                <div style={formStyles.formGroup}>
-                  <label htmlFor="name" style={formStyles.label}>
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    style={formStyles.input}
-                    placeholder="Your name"
-                  />
-                </div>
-                
-                <div style={formStyles.formGroup}>
-                  <label htmlFor="email" style={formStyles.label}>
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    style={formStyles.input}
-                    placeholder="Your email address"
-                  />
-                </div>
-                
-                <div style={formStyles.formGroup}>
-                  <label htmlFor="phone" style={formStyles.label}>
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    pattern="[0-9]{10}"
-                    style={formStyles.input}
-                    placeholder="Your phone number"
-                  />
-                </div>
-                
-                <div style={formStyles.formGroup}>
-                  <label htmlFor="message" style={formStyles.label}>
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    minLength="10"
-                    style={formStyles.textarea}
-                    placeholder="Your message"
-                  ></textarea>
-                </div>
-                
-                <button 
-                  type="submit" 
-                  style={{
-                    ...formStyles.button,
-                    opacity: isSubmitting ? 0.7 : 1,
-                    cursor: isSubmitting ? 'not-allowed' : 'pointer'
-                  }}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </button>
-              </form>
-            </motion.div>
-            {notification && (
-              <div style={{
-                ...notificationStyle,
-                backgroundColor: notification.includes("error") ? '#ffebee' : '#e8f5e9',
-                color: notification.includes("error") ? '#c62828' : '#2e7d32',
-                border: `1px solid ${notification.includes("error") ? '#ef9a9a' : '#a5d6a7'}`,
-                borderRadius: '4px',
-                padding: '15px',
-                marginTop: '20px'
-              }}>
-                {notification}
+    <section id={id} className="section">
+      <div id="contact" style={{ padding: '50px 20px', backgroundColor: '#f9f9f9' }}>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-7">
+              <div className="section-title" style={{ textAlign: 'center', marginBottom: '40px' }}>
+                <h2>Contact Us</h2>
               </div>
-            )}
-          </div>
-
-          <div className="col-md-5 contact-info" style={{ 
-            padding: '40px',
-            backgroundColor: '#052453',
-            borderRadius: '10px',
-            color: 'white',
-            boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
-            border: '3px solid #c4a43f',
-            position: 'relative',
-            overflow: 'hidden',
-            minHeight: '550px', // Ensure minimum height
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between'
-          }}>
-            {/* Gold accent bar */}
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '12px', // Wider accent bar
-              height: '100%',
-              backgroundColor: '#c4a43f'
-            }}></div>
-            
-            <div className="contact-item" style={{ marginBottom: '40px', paddingLeft: '20px' }}>
-              <h3 style={{ 
-                color: '#c4a43f', 
-                marginBottom: '30px', 
-                fontSize: '2.3rem', // Larger heading
-                fontWeight: 'bold',
-                borderBottom: '2px solid rgba(196, 164, 63, 0.3)',
-                paddingBottom: '15px'
-              }}>Contact Info</h3>
-              
-              <p style={{ 
-                marginBottom: '25px', 
-                fontSize: '1.4rem', // Larger text
-                display: 'flex',
-                alignItems: 'center'
-              }}>
-                <i className="fa fa-map-marker" style={{ 
-                  marginRight: '20px', 
-                  color: '#c4a43f',
-                  fontSize: '2rem' // Larger icon
-                }}></i>
-                <span>{props.data ? props.data.address : "Loading address..."}</span>
-              </p>
-              
-              <p style={{ 
-                marginBottom: '25px', 
-                fontSize: '1.4rem', // Larger text
-                display: 'flex',
-                alignItems: 'center'
-              }}>
-                <i className="fa fa-phone" style={{ 
-                  marginRight: '20px', 
-                  color: '#c4a43f',
-                  fontSize: '2rem' // Larger icon
-                }}></i>
-                <span>{props.data ? props.data.phone : "Loading phone..."}</span>
-              </p>
-              
-              <p style={{ 
-                marginBottom: '25px', 
-                fontSize: '1.4rem',
-                display: 'flex',
-                alignItems: 'center'
-              }}>
-                <i className="fa fa-phone" style={{ 
-                  marginRight: '20px', 
-                  color: '#c4a43f',
-                  fontSize: '2rem'
-                }}></i>
-                <span>{props.data ? (props.data.phone2 || "Loading alternate phone...") : "Loading..."}</span>
-              </p>
-              
-              <p style={{ 
-                marginBottom: '25px', 
-                fontSize: '1.4rem',
-                display: 'flex',
-                alignItems: 'center'
-              }}>
-                <i className="fa fa-envelope-o" style={{ 
-                  marginRight: '20px', 
-                  color: '#c4a43f',
-                  fontSize: '2rem'
-                }}></i>
-                <span>{props.data ? props.data.email : "Loading email..."}</span>
-              </p>
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0, 0.55, 0.45, 1]
+                }}
+              >
+                <form onSubmit={handleSubmit} className="contact-form">
+                  <div style={formStyles.formGroup}>
+                    <label htmlFor="name" style={formStyles.label}>
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      style={formStyles.input}
+                      placeholder="Your name"
+                    />
+                  </div>
+                  
+                  <div style={formStyles.formGroup}>
+                    <label htmlFor="email" style={formStyles.label}>
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      style={formStyles.input}
+                      placeholder="Your email address"
+                    />
+                  </div>
+                  
+                  <div style={formStyles.formGroup}>
+                    <label htmlFor="phone" style={formStyles.label}>
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      pattern="[0-9]{10}"
+                      style={formStyles.input}
+                      placeholder="Your phone number"
+                    />
+                  </div>
+                  
+                  <div style={formStyles.formGroup}>
+                    <label htmlFor="message" style={formStyles.label}>
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      minLength="10"
+                      style={formStyles.textarea}
+                      placeholder="Your message"
+                    ></textarea>
+                  </div>
+                  
+                  <button 
+                    type="submit" 
+                    style={{
+                      ...formStyles.button,
+                      opacity: isSubmitting ? 0.7 : 1,
+                      cursor: isSubmitting ? 'not-allowed' : 'pointer'
+                    }}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </button>
+                </form>
+              </motion.div>
+              {notification && (
+                <div style={{
+                  ...notificationStyle,
+                  backgroundColor: notification.includes("error") ? '#ffebee' : '#e8f5e9',
+                  color: notification.includes("error") ? '#c62828' : '#2e7d32',
+                  border: `1px solid ${notification.includes("error") ? '#ef9a9a' : '#a5d6a7'}`,
+                  borderRadius: '4px',
+                  padding: '15px',
+                  marginTop: '20px'
+                }}>
+                  {notification}
+                </div>
+              )}
             </div>
-            
-            <div className="section-title" style={{ paddingLeft: '20px' }}>
-              <h3 style={{ 
-                color: '#c4a43f', 
-                marginBottom: '25px', 
-                fontSize: '2.3rem',
-                fontWeight: 'bold',
-                borderBottom: '2px solid rgba(196, 164, 63, 0.3)',
-                paddingBottom: '15px'
-              }}>Quick Connect</h3>
+
+            <div className="col-md-5 contact-info" style={{ 
+              padding: '40px',
+              backgroundColor: '#052453',
+              borderRadius: '10px',
+              color: 'white',
+              boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
+              border: '3px solid #c4a43f',
+              position: 'relative',
+              overflow: 'hidden',
+              minHeight: '550px', // Ensure minimum height
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
+            }}>
+              {/* Gold accent bar */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '12px', // Wider accent bar
+                height: '100%',
+                backgroundColor: '#c4a43f'
+              }}></div>
               
-              <div style={{ display: 'grid', gap: '2px' }}>
-                <a href="https://wa.me/+447459533146" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                  <button style={{ ...whatsappButtonStyle, marginTop: '0' }}>
-                    <i className="fa fa-whatsapp" style={{ fontSize: '1.8rem' }}></i>
-                    WhatsApp UK
-                  </button>
-                </a>
+              <div className="contact-item" style={{ marginBottom: '40px', paddingLeft: '20px' }}>
+                <h3 style={{ 
+                  color: '#c4a43f', 
+                  marginBottom: '30px', 
+                  fontSize: '2.3rem', // Larger heading
+                  fontWeight: 'bold',
+                  borderBottom: '2px solid rgba(196, 164, 63, 0.3)',
+                  paddingBottom: '15px'
+                }}>Contact Info</h3>
                 
-                <a href="https://wa.me/+971508647765" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                  <button style={whatsappButtonStyle}>
-                    <i className="fa fa-whatsapp" style={{ fontSize: '1.8rem' }}></i>
-                    WhatsApp UAE
-                  </button>
-                </a>
+                <p style={{ 
+                  marginBottom: '25px', 
+                  fontSize: '1.4rem', // Larger text
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                  <i className="fa fa-map-marker" style={{ 
+                    marginRight: '20px', 
+                    color: '#c4a43f',
+                    fontSize: '2rem' // Larger icon
+                  }}></i>
+                  <span>{data ? data.address : "Loading address..."}</span>
+                </p>
+                
+                <p style={{ 
+                  marginBottom: '25px', 
+                  fontSize: '1.4rem', // Larger text
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                  <i className="fa fa-phone" style={{ 
+                    marginRight: '20px', 
+                    color: '#c4a43f',
+                    fontSize: '2rem' // Larger icon
+                  }}></i>
+                  <span>{data ? data.phone : "Loading phone..."}</span>
+                </p>
+                
+                <p style={{ 
+                  marginBottom: '25px', 
+                  fontSize: '1.4rem',
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                  <i className="fa fa-phone" style={{ 
+                    marginRight: '20px', 
+                    color: '#c4a43f',
+                    fontSize: '2rem'
+                  }}></i>
+                  <span>{data ? (data.phone2 || "Loading alternate phone...") : "Loading..."}</span>
+                </p>
+                
+                <p style={{ 
+                  marginBottom: '25px', 
+                  fontSize: '1.4rem',
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                  <i className="fa fa-envelope-o" style={{ 
+                    marginRight: '20px', 
+                    color: '#c4a43f',
+                    fontSize: '2rem'
+                  }}></i>
+                  <span>{data ? data.email : "Loading email..."}</span>
+                </p>
+              </div>
+              
+              <div className="section-title" style={{ paddingLeft: '20px' }}>
+                <h3 style={{ 
+                  color: '#c4a43f', 
+                  marginBottom: '25px', 
+                  fontSize: '2.3rem',
+                  fontWeight: 'bold',
+                  borderBottom: '2px solid rgba(196, 164, 63, 0.3)',
+                  paddingBottom: '15px'
+                }}>Quick Connect</h3>
+                
+                <div style={{ display: 'grid', gap: '2px' }}>
+                  <a href="https://wa.me/+447459533146" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                    <button style={{ ...whatsappButtonStyle, marginTop: '0' }}>
+                      <i className="fa fa-whatsapp" style={{ fontSize: '1.8rem' }}></i>
+                      WhatsApp UK
+                    </button>
+                  </a>
+                  
+                  <a href="https://wa.me/+971508647765" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                    <button style={whatsappButtonStyle}>
+                      <i className="fa fa-whatsapp" style={{ fontSize: '1.8rem' }}></i>
+                      WhatsApp UAE
+                    </button>
+                  </a>
 
-                <a href={props.data?.facebook} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                  <button style={facebookButtonStyle}>
-                    <i className="fa fa-facebook" style={{ fontSize: '1.8rem' }}></i>
-                    Facebook
-                  </button>
-                </a>
+                  <a href={data?.facebook} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                    <button style={facebookButtonStyle}>
+                      <i className="fa fa-facebook" style={{ fontSize: '1.8rem' }}></i>
+                      Facebook
+                    </button>
+                  </a>
 
-                <a href={props.data?.instagram} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                  <button style={instagramButtonStyle}>
-                    <i className="fa fa-instagram" style={{ fontSize: '1.8rem' }}></i>
-                    Instagram
-                  </button>
-                </a>
+                  <a href={data?.instagram} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                    <button style={instagramButtonStyle}>
+                      <i className="fa fa-instagram" style={{ fontSize: '1.8rem' }}></i>
+                      Instagram
+                    </button>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

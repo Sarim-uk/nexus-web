@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export const Header = (props) => {
+export const Header = ({ data, id }) => {
   return (
-    <header id="header">
+    <header id={id}>
       <div className="intro">
         <div className="overlay">
           <div className="container">
@@ -19,10 +19,10 @@ export const Header = (props) => {
                   }}
                 >
                   <h1>
-                    {props.data ? props.data.title : "Loading"}
+                    {data ? data.title : "Loading"}
                     <span></span>
                   </h1>
-                  <p>{props.data ? props.data.paragraph : "Loading"}</p>
+                  <p>{data ? data.paragraph : "Loading"}</p>
                   <a
                     href="#features"
                     className="btn btn-custom btn-lg page-scroll"

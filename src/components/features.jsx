@@ -1,12 +1,13 @@
 import React from "react";
 import { motion } from 'framer-motion';
 
-export const Features = (props) => {
+export const Features = ({ data, id }) => {
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+      id={id}
     >
       <div id="features" className="text-center">
         <div className="container">
@@ -14,8 +15,8 @@ export const Features = (props) => {
             <h2>Features</h2>
           </div>
           <div className="row">
-            {props.data
-              ? props.data.map((d, i) => (
+            {data
+              ? data.map((d, i) => (
                   <motion.div 
                     key={`${d.title}-${i}`}
                     initial={{ opacity: 0, y: 20, scale: 0.95 }}
