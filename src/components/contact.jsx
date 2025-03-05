@@ -66,7 +66,7 @@ export const Contact = (props) => {
   const notificationStyle = {
     margin: '15px 0',
     padding: '12px',
-    fontSize: '0.9rem',
+    fontSize: '15px',
     '@media (min-width: 768px)': {
       fontSize: '1rem',
       padding: '15px'
@@ -74,14 +74,35 @@ export const Contact = (props) => {
   };
 
   const whatsappButtonStyle = {
-    marginTop: "20px",
-    padding: "10px 20px",
-    backgroundColor: "#25D366", // WhatsApp green color
-    color: "#fff", // White text color
+    padding: "18px 25px",
+    backgroundColor: "#25D366",
+    color: "#fff",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "4px",
     cursor: "pointer",
     textAlign: "center",
+    width: "100%", 
+    fontSize: "1.3rem",
+    fontWeight: "bold",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "15px",
+    boxShadow: "0 6px 20px rgba(37, 211, 102, 0.4)",
+    transition: "all 0.3s ease",
+    marginTop: "2px" // Reduced from 15px to 2px
+  };
+
+  const facebookButtonStyle = {
+    ...whatsappButtonStyle,
+    backgroundColor: '#1877F2', // Facebook blue
+    boxShadow: '0 6px 20px rgba(24, 119, 242, 0.4)'
+  };
+
+  const instagramButtonStyle = {
+    ...whatsappButtonStyle,
+    background: 'linear-gradient(45deg, #405DE6, #833AB4, #E1306C)', // Instagram gradient
+    boxShadow: '0 6px 20px rgba(64, 93, 230, 0.4)'
   };
 
   // Completely revamp the formStyles object with more prominent labels
@@ -312,14 +333,28 @@ export const Contact = (props) => {
               
               <p style={{ 
                 marginBottom: '25px', 
-                fontSize: '1.4rem', // Larger text
+                fontSize: '1.4rem',
+                display: 'flex',
+                alignItems: 'center'
+              }}>
+                <i className="fa fa-phone" style={{ 
+                  marginRight: '20px', 
+                  color: '#c4a43f',
+                  fontSize: '2rem'
+                }}></i>
+                <span>{props.data ? (props.data.phone2 || "Loading alternate phone...") : "Loading..."}</span>
+              </p>
+              
+              <p style={{ 
+                marginBottom: '25px', 
+                fontSize: '1.4rem',
                 display: 'flex',
                 alignItems: 'center'
               }}>
                 <i className="fa fa-envelope-o" style={{ 
                   marginRight: '20px', 
                   color: '#c4a43f',
-                  fontSize: '2rem' // Larger icon
+                  fontSize: '2rem'
                 }}></i>
                 <span>{props.data ? props.data.email : "Loading email..."}</span>
               </p>
@@ -329,33 +364,41 @@ export const Contact = (props) => {
               <h3 style={{ 
                 color: '#c4a43f', 
                 marginBottom: '25px', 
-                fontSize: '2.3rem', // Larger heading
+                fontSize: '2.3rem',
                 fontWeight: 'bold',
                 borderBottom: '2px solid rgba(196, 164, 63, 0.3)',
                 paddingBottom: '15px'
               }}>Quick Connect</h3>
               
-              <a href="https://wa.me/+447459533146" target="_blank" rel="noopener noreferrer" style={{
-                display: 'block',
-                textDecoration: 'none'
-              }}>
-                <button style={{
-                  ...whatsappButtonStyle,
-                  width: '100%',
-                  padding: '18px 25px', // Larger padding
-                  fontSize: '1.3rem', // Larger text
-                  fontWeight: 'bold',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '15px',
-                  boxShadow: '0 6px 20px rgba(37, 211, 102, 0.4)',
-                  transition: 'all 0.3s ease'
-                }}>
-                  <i className="fa fa-whatsapp" style={{ fontSize: '1.8rem' }}></i>
-                  WhatsApp Chat
-                </button>
-              </a>
+              <div style={{ display: 'grid', gap: '2px' }}>
+                <a href="https://wa.me/+447459533146" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                  <button style={{ ...whatsappButtonStyle, marginTop: '0' }}>
+                    <i className="fa fa-whatsapp" style={{ fontSize: '1.8rem' }}></i>
+                    WhatsApp UK
+                  </button>
+                </a>
+                
+                <a href="https://wa.me/+971508647765" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                  <button style={whatsappButtonStyle}>
+                    <i className="fa fa-whatsapp" style={{ fontSize: '1.8rem' }}></i>
+                    WhatsApp UAE
+                  </button>
+                </a>
+
+                <a href={props.data?.facebook} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                  <button style={facebookButtonStyle}>
+                    <i className="fa fa-facebook" style={{ fontSize: '1.8rem' }}></i>
+                    Facebook
+                  </button>
+                </a>
+
+                <a href={props.data?.instagram} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                  <button style={instagramButtonStyle}>
+                    <i className="fa fa-instagram" style={{ fontSize: '1.8rem' }}></i>
+                    Instagram
+                  </button>
+                </a>
+              </div>
             </div>
           </div>
         </div>
