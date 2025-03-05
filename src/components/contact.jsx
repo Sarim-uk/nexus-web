@@ -32,6 +32,13 @@ export const Contact = (props) => {
     setIsSubmitting(true); // Set submitting state to true
     setNotification(""); // Clear any previous notifications
     
+    // Check if any fields are empty
+    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+      setNotification("All fields are required");
+      setIsSubmitting(false);
+      return;
+    }
+    
     // Check if emailjs is properly loaded
     if (!emailjs) {
       console.error("EmailJS not loaded");
@@ -213,7 +220,7 @@ export const Contact = (props) => {
                 
                 <div style={formStyles.formGroup}>
                   <label htmlFor="phone" style={formStyles.label}>
-                    Phone (Optional)
+                    Phone
                   </label>
                   <input
                     type="tel"
@@ -221,8 +228,10 @@ export const Contact = (props) => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
+                    required
+                    pattern="[0-9]{10}"
                     style={formStyles.input}
-                    placeholder="Your phone number (optional)"
+                    placeholder="Your phone number"
                   />
                 </div>
                 
@@ -236,6 +245,7 @@ export const Contact = (props) => {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    minLength="10"
                     style={formStyles.textarea}
                     placeholder="Your message"
                   ></textarea>
