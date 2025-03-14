@@ -15,6 +15,43 @@ export const Navigation = (props) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (isMobileMenuOpen && !e.target.closest('.mobile-menu-overlay') && !e.target.closest('.menu-button')) {
+        setMobileMenuOpen(false);
+      }
+    };
+    
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isMobileMenuOpen]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
+  // Handle escape key to close menu
+  useEffect(() => {
+    const handleEscKey = (e) => {
+      if (e.key === 'Escape' && isMobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    
+    document.addEventListener('keydown', handleEscKey);
+    return () => document.removeEventListener('keydown', handleEscKey);
+  }, [isMobileMenuOpen]);
+
   // Navigation items
   const navItems = [
     { name: 'Programs', target: 'features' },
@@ -22,6 +59,46 @@ export const Navigation = (props) => {
     { name: 'Success Stories', target: 'testimonials' },
     { name: 'Contact', target: 'contact' }
   ];
+
+  // Handle navigation click
+  const handleNavClick = (targetId) => {
+    console.log(`Navigating to: ${targetId}`);
+    setMobileMenuOpen(false);
+    
+    // Use setTimeout to allow the menu to close first
+    setTimeout(() => {
+      // Try to find the element with the exact ID
+      let targetElement = document.getElementById(targetId);
+      
+      // If not found, try to find it as a child element
+      if (!targetElement) {
+        console.log(`Element with ID ${targetId} not found directly, searching for children...`);
+        const sections = document.querySelectorAll(`[id*="${targetId}"]`);
+        if (sections.length > 0) {
+          targetElement = sections[0];
+          console.log(`Found element with ID containing ${targetId}`);
+        }
+      }
+      
+      if (targetElement) {
+        console.log(`Found element, scrolling to ${targetId}`);
+        const navbarHeight = 80;
+        
+        // Use scrollIntoView for better compatibility
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+        
+        // Apply offset after scrolling
+        setTimeout(() => {
+          window.scrollBy({
+            top: -navbarHeight,
+            behavior: 'smooth'
+          });
+        }, 100);
+      } else {
+        console.error(`Element with ID ${targetId} not found`);
+      }
+    }, 300);
+  };
 
   return (
     <motion.nav 
@@ -52,11 +129,9 @@ export const Navigation = (props) => {
           alignItems: 'center'
         }}>
           {/* Logo/Brand */}
-          <Link 
-            to="header" 
-            spy={true} 
-            smooth={true} 
+          <div 
             className="navbar-brand" 
+            onClick={() => handleNavClick('header')}
             style={{
               fontSize: '1.8rem',
               fontWeight: '700',
@@ -64,7 +139,8 @@ export const Navigation = (props) => {
               letterSpacing: '1px',
               display: 'flex',
               alignItems: 'center',
-              gap: '12px'
+              gap: '12px',
+              cursor: 'pointer'
             }}
           >
             <img 
@@ -78,115 +154,40 @@ export const Navigation = (props) => {
                 marginRight: '12px'
               }}
             />
-            Nexus Academy
-          </Link>
-
-          {/* Desktop Menu */}
-          <div className="desktop-menu" style={{ 
-            display: 'flex', 
-            gap: '40px',
-            alignItems: 'center',
-            '@media (max-width: 992px)': {
-              display: 'none'
-            }
-          }}>
-            {navItems.map((item) => (
-              <Link
-                key={item.target}
-                to={item.target}
-                spy={true}
-                smooth={true}
-                offset={-80}
-                duration={800}
-                activeClass="active-nav-item"
-                onClick={() => {
-                  if (isMobileMenuOpen) setMobileMenuOpen(false);
-                  requestAnimationFrame(() => {
-                    const target = document.getElementById(item.target);
-                    if (target) {
-                      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                  });
-                }}
-                style={{
-                  color: '#fff',
-                  cursor: 'pointer',
-                  position: 'relative',
-                  padding: '8px 0',
-                  fontSize: '1.1rem',
-                  transition: 'all 0.3s ease',
-                  textDecoration: 'none',
-                  fontWeight: 500
-                }}
-              >
-                {item.name}
-                <motion.div 
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: '2px',
-                    background: '#c4a43f',
-                    scaleX: 0,
-                    transformOrigin: 'right'
-                  }}
-                  whileHover={{ scaleX: 1, transformOrigin: 'left' }}
-                  transition={{ duration: 0.3 }}
-                />
-              </Link>
-            ))}
+            <span className="brand-text">Nexus Academy</span>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Menu Button (visible on all screen sizes) */}
           <button 
-            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setMobileMenuOpen(!isMobileMenuOpen);
+            }}
+            className="menu-button"
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
             style={{
-              display: 'none',
               background: 'transparent',
               border: 'none',
               cursor: 'pointer',
-              '@media (max-width: 992px)': {
-                display: 'block'
-              }
+              zIndex: 1050,
+              position: 'relative',
+              width: '40px',
+              height: '40px',
+              padding: '0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
           >
-            <motion.div
-              animate={isMobileMenuOpen ? "open" : "closed"}
-              variants={{
-                open: { rotate: 45, y: 5 },
-                closed: { rotate: 0 }
-              }}
-              style={{
-                width: '30px',
-                height: '2px',
-                background: '#c4a43f',
-                position: 'relative',
-                '&::before': {
-                  content: '""',
-                  position: 'absolute',
-                  width: '30px',
-                  height: '2px',
-                  background: '#c4a43f',
-                  top: '-8px',
-                  left: 0,
-                  transition: 'all 0.3s ease'
-                },
-                '&::after': {
-                  content: '""',
-                  position: 'absolute',
-                  width: '30px',
-                  height: '2px',
-                  background: '#c4a43f',
-                  top: '8px',
-                  left: 0,
-                  transition: 'all 0.3s ease'
-                }
-              }}
-            />
+            <div className={`hamburger-icon ${isMobileMenuOpen ? 'open' : ''}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </button>
 
-          {/* Mobile Menu Overlay */}
+          {/* Menu Overlay */}
           <AnimatePresence>
             {isMobileMenuOpen && (
               <motion.div
@@ -194,60 +195,27 @@ export const Navigation = (props) => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: '100%' }}
                 transition={{ duration: 0.3 }}
-                style={{
-                  position: 'fixed',
-                  top: 0,
-                  right: 0,
-                  bottom: 0,
-                  width: '300px',
-                  background: 'rgba(5, 36, 83, 0.98)',
-                  backdropFilter: 'blur(12px)',
-                  padding: '100px 30px',
-                  zIndex: 999,
-                  boxShadow: '-4px 0 20px rgba(0,0,0,0.2)'
-                }}
+                className="mobile-menu-overlay"
               >
-                {navItems.map((item) => (
-                  <motion.div
-                    key={item.target}
-                    initial={{ x: 20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    exit={{ x: 20, opacity: 0 }}
-                  >
-                    <Link
-                      to={item.target}
-                      spy={true}
-                      smooth={true}
-                      offset={-80}
-                      duration={800}
-                      activeClass="active-nav-item"
-                      onClick={() => {
-                        if (isMobileMenuOpen) setMobileMenuOpen(false);
-                        requestAnimationFrame(() => {
-                          const target = document.getElementById(item.target);
-                          if (target) {
-                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                          }
-                        });
-                      }}
-                      style={{
-                        display: 'block',
-                        color: '#fff',
-                        fontSize: '1.4rem',
-                        padding: '15px 0',
-                        borderBottom: '1px solid rgba(196, 164, 63, 0.2)',
-                        transition: 'all 0.3s ease',
-                        textDecoration: 'none',
-                        '&:hover': {
-                          color: '#c4a43f',
-                          paddingLeft: '15px'
-                        }
-                      }}
+                <div className="mobile-menu-content">
+                  {navItems.map((item, index) => (
+                    <motion.div
+                      key={item.target}
+                      initial={{ x: 20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      exit={{ x: 20, opacity: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="mobile-menu-item"
                     >
-                      {item.name}
-                    </Link>
-                  </motion.div>
-                ))}
+                      <div
+                        onClick={() => handleNavClick(item.target)}
+                        className="mobile-nav-link"
+                      >
+                        {item.name}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>

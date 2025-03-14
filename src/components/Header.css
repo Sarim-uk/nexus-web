@@ -90,4 +90,129 @@
     overflow-y: visible;
     padding-bottom: 0;
   }
+}
+
+.header-section {
+  width: 100%;
+  position: relative;
+}
+
+.intro {
+  display: table;
+  width: 100%;
+  padding: 0;
+  background: url(../../public/img/intro-bg.jpg) center center no-repeat;
+  background-color: #e5e5e5;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  min-height: 100vh;
+}
+
+.intro .overlay {
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-text {
+  text-align: center;
+  padding: 160px 0 120px;
+}
+
+.intro h1 {
+  font-family: "Raleway", sans-serif;
+  color: #313131;
+  font-size: 72px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.intro p {
+  color: #000000;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 30px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  max-width: 700px;
+}
+
+.btn-custom {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #5ca9fb;
+  background-image: linear-gradient(to right, #5ca9fb 0%, #6372ff 100%);
+  padding: 14px 34px;
+  letter-spacing: 1px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 25px;
+  transition: all 0.5s linear;
+  border: 0;
+}
+
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom.focus,
+.btn-custom:active,
+.btn-custom.active {
+  color: #fff;
+  background-image: none;
+  background-color: #6372ff;
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+  .intro {
+    min-height: 100vh;
+    background-position: center;
+  }
+  
+  .intro-text {
+    padding: 120px 0 80px;
+  }
+  
+  .intro h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+  }
+  
+  .intro p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    padding: 0 15px;
+  }
+  
+  .btn-custom {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 991px) {
+  .intro h1 {
+    font-size: 54px;
+  }
+  
+  .intro p {
+    font-size: 20px;
+  }
+}
+
+/* Fix for iOS Safari viewport height issue */
+@supports (-webkit-touch-callout: none) {
+  .intro {
+    min-height: -webkit-fill-available;
+  }
 } 

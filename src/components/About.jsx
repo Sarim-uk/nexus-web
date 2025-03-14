@@ -2,8 +2,8 @@ import React from "react";
 
 export const About = ({ data, id }) => {
   return (
-    <section id={id} className="section">
-      <div id="about" style={{ 
+    <section id={id} className="section about-section">
+      <div style={{ 
         width: '100%',
         padding: '50px 15px',
         boxSizing: 'border-box'

@@ -6,6 +6,7 @@
   --primary-blue: #052453;     /* Updated to your specified color */
   --accent-gold: #d4af37;      /* Richer gold from your contact section */
   --text-light: #ffffff;
+  --vh: 1vh;
 }
 
 body {
@@ -710,14 +711,24 @@ textarea:focus {
   z-index: 1000;
 }
 
-/* Mobile menu overlay fixes */
+/* Mobile menu overlay */
 .mobile-menu-overlay {
   position: fixed !important;
   top: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
-  left: unset !important;
-  width: 300px !important;
+  width: 100% !important;
+  max-width: 80% !important; /* Increased from 300px to percentage for better responsiveness */
+  background: rgba(5, 36, 83, 0.98) !important;
+  backdrop-filter: blur(12px) !important;
+  padding: 100px 30px 30px !important;
+  z-index: 9999 !important;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.2) !important;
+  overflow-y: auto !important;
+  height: 100vh !important; /* Ensure full height */
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
 }
 
 /* Hamburger icon animation fix */
@@ -797,4 +808,420 @@ section[id] {
 #contact {
   position: relative;
   z-index: 1;
+}
+
+/* Additional Mobile Optimizations */
+@media (max-width: 767px) {
+  /* Fix for fixed navbar overlapping content */
+  body {
+    padding-top: 80px;
+  }
+  
+  /* Improve touch targets */
+  button, 
+  a.btn,
+  .navbar-nav > li > a {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Adjust section padding */
+  #features,
+  #about,
+  #services,
+  #testimonials,
+  #contact {
+    padding: 40px 0;
+  }
+  
+  /* Improve form usability on mobile */
+  input, 
+  textarea, 
+  select {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+    padding: 12px !important;
+  }
+  
+  /* Fix container width */
+  .container {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  /* Adjust heading sizes */
+  h1 { font-size: 2rem !important; }
+  h2 { font-size: 1.8rem !important; }
+  h3 { font-size: 1.5rem !important; }
+  
+  /* Fix image sizing */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Improve navbar on mobile */
+  .navbar-fixed-top {
+    position: fixed !important;
+    top: 0;
+    z-index: 1030;
+  }
+  
+  /* Fix mobile menu overlay */
+  .mobile-menu-overlay {
+    width: 100% !important;
+    max-width: 300px;
+  }
+  
+  /* Ensure proper scrolling */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Fix for iOS height issues */
+  .intro, 
+  #header {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+/* Brand text responsive styles */
+@media (max-width: 480px) {
+  .brand-text {
+    display: none;
+  }
+  
+  .navbar-brand {
+    justify-content: center;
+  }
+  
+  .navbar-brand img {
+    margin-right: 0 !important;
+  }
+}
+
+/* Mobile menu button visibility */
+.mobile-menu-button {
+  display: none !important; /* Hidden on desktop by default */
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  z-index: 10000 !important; /* Higher than the overlay */
+  position: relative !important;
+  width: 44px !important;
+  height: 44px !important;
+  padding: 10px !important;
+  margin-right: -10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+@media (max-width: 992px) {
+  .mobile-menu-button {
+    display: flex !important; /* Visible on mobile */
+  }
+  
+  .desktop-menu {
+    display: none !important; /* Hide desktop menu on mobile */
+  }
+  
+  /* Fix mobile menu overlay on smaller screens */
+  .mobile-menu-overlay {
+    max-width: 100% !important; /* Full width on very small screens */
+  }
+  
+  @media (min-width: 576px) {
+    .mobile-menu-overlay {
+      max-width: 80% !important; /* 80% width on larger mobile screens */
+    }
+  }
+}
+
+/* Desktop menu visibility */
+.desktop-menu {
+  display: none !important; /* Always hide desktop menu */
+}
+
+.menu-button {
+  display: flex !important; /* Always show hamburger menu */
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  z-index: 10000 !important;
+  position: relative !important;
+  width: 44px !important;
+  height: 44px !important;
+  padding: 10px !important;
+  margin-right: -10px !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Hamburger Icon Styles */
+.hamburger-icon {
+  width: 30px;
+  height: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #c4a43f;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-icon.open span:nth-child(1) {
+  transform: translateY(8.5px) rotate(45deg);
+}
+
+.hamburger-icon.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-icon.open span:nth-child(3) {
+  transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  max-width: 80%;
+  background: rgba(5, 36, 83, 0.98);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  overflow-y: auto;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mobile-menu-item {
+  margin-bottom: 10px;
+}
+
+.mobile-nav-link {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(196, 164, 63, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.mobile-nav-link:hover {
+  color: #c4a43f;
+  padding-left: 0.5rem;
+}
+
+/* Remove mobile-specific media queries for menu button */
+@media (max-width: 992px) {
+  .mobile-menu-button {
+    display: none !important; /* Hide old mobile button */
+  }
+}
+
+/* Features Section Styling */
+.features-section {
+  padding: 60px 0;
+  background: #f9f9f9;
+}
+
+.features-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.feature-card {
+  padding: 15px;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.feature-box {
+  background: #fff;
+  border-radius: 8px;
+  padding: 30px 20px;
+  height: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.feature-box i {
+  font-size: 40px;
+  margin-bottom: 20px;
+  color: #c4a43f;
+  display: block;
+}
+
+.feature-box h3 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: #052453;
+  font-weight: 600;
+}
+
+.feature-box p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Mobile-specific styles for Features */
+@media (max-width: 767px) {
+  .features-section {
+    padding: 40px 0;
+  }
+  
+  .feature-card {
+    width: 100% !important; /* Force full width on mobile */
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .feature-box {
+    padding: 25px 20px;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  .feature-box i {
+    font-size: 36px;
+    margin-bottom: 15px;
+  }
+  
+  .feature-box h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+  
+  /* Add card-like styling for mobile */
+  .feature-box {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Center the feature box on mobile */
+  .features-container {
+    justify-content: center;
+  }
+}
+
+/* About Section - Why Choose Us - FIXED */
+.about-text h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #052453;
+}
+
+.list-style ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.list-style ul li {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 10px;
+  list-style-type: disc;
+  color: #333;
+  padding-left: 5px;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+  /* Larger text for About section on mobile - FIXED */
+  .about-text h3 {
+    font-size: 1.6rem !important;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  
+  .list-style ul {
+    padding-left: 20px;
+  }
+  
+  .list-style ul li {
+    font-size: 1.2rem !important;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    list-style-type: disc;
+    padding-left: 5px;
+  }
+  
+  /* Ensure proper spacing in the list columns on mobile */
+  .list-style .col-xs-12 {
+    padding-bottom: 10px;
+  }
+  
+  /* Larger text for Testimonials on mobile */
+  #testimonials p {
+    font-size: 1.2rem !important;
+    line-height: 1.5;
+  }
+  
+  /* Add gap between contact form and info on mobile */
+  #contact .col-md-4 {
+    margin-top: 50px !important;
+    padding-top: 30px;
+    border-top: 1px solid rgba(196, 164, 63, 0.2);
+  }
+  
+  /* Make contact form button more prominent */
+  #contact button[type="submit"] {
+    margin-bottom: 30px;
+    font-size: 1.2rem !important;
+    padding: 15px 25px !important;
+  }
+}
+
+/* Testimonials Section */
+#testimonials p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #34495e;
+}
+
+#testimonials .section-title h2 {
+  margin-bottom: 40px;
+}
+
+/* Contact Section */
+#contact .col-md-4 {
+  margin-top: 30px;
 }
