@@ -230,9 +230,8 @@ export const Contact = ({ data, id }) => {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      pattern="[0-9]{10}"
                       style={formStyles.input}
-                      placeholder="Your phone number"
+                      placeholder="Your phone number (with country code)"
                     />
                   </div>
                   

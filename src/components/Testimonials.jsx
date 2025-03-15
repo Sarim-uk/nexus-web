@@ -32,16 +32,17 @@ export const Testimonials = (props) => {
                 style={cardStyle}
                 whileHover={{ y: -10 }}
                 transition={{ duration: 0.3 }}
+                className="testimonial-card"
               >
                 <div style={cardHeaderStyle}>
                   <img src={d.img} alt={d.name} style={avatarStyle} />
                   <div style={headerTextStyle}>
-                    <h3 style={{ margin: 0, color: '#2c3e50' }}>{d.name}</h3>
-                    <p style={{ margin: 0, color: '#7f8c8d' }}>{d.role} {d.company}</p>
+                    <h3 style={{ margin: 0, color: '#2c3e50', fontSize: '1.4rem' }}>{d.name}</h3>
+                    <p style={{ margin: 0, color: '#7f8c8d', fontSize: '1.1rem' }}>{d.role} {d.company}</p>
                   </div>
                 </div>
                 <div style={cardBodyStyle}>
-                  <p style={{ fontSize: '1.1rem', lineHeight: 1.6, color: '#34495e' }}>
+                  <p className="testimonial-text" style={{ fontSize: '1.1rem', lineHeight: 1.6, color: '#34495e' }}>
                     "{d.text}"
                   </p>
                   <div style={ratingStyle}>
