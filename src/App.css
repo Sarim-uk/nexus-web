@@ -104,6 +104,31 @@ html {
   display: flex;
   align-items: center;
   font-family: 'Montserrat', sans-serif;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 99999 !important;
+  -webkit-transform: translateZ(0) !important;
+  transform: translateZ(0) !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+  will-change: transform !important;
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .navbar-default {
+    position: fixed !important;
+    top: env(safe-area-inset-top, 0) !important;
+    padding-top: env(safe-area-inset-top, 0) !important;
+    height: calc(80px + env(safe-area-inset-top, 0)) !important;
+  }
+  
+  body {
+    padding-top: calc(80px + env(safe-area-inset-top, 0)) !important;
+  }
 }
 
 .navbar-brand {
@@ -193,17 +218,28 @@ html {
 /* Mobile Adjustments */
 @media (max-width: 768px) {
   .navbar-default {
-    z-index: 1000; /* Ensure menu stays on top */
+    z-index: 99999 !important;
+    position: fixed !important;
+    top: env(safe-area-inset-top, 0) !important;
+    padding-top: env(safe-area-inset-top, 0) !important;
+    height: calc(80px + env(safe-area-inset-top, 0)) !important;
   }
 
   .navbar-collapse {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: rgba(5, 36, 83, 0.98);
-    backdrop-filter: blur(15px);
-    padding: 0 15px;
+    position: fixed !important;
+    top: calc(80px + env(safe-area-inset-top, 0)) !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: rgba(5, 36, 83, 0.98) !important;
+    backdrop-filter: blur(15px) !important;
+    padding: 0 15px !important;
+    z-index: 99998 !important;
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+  }
+  
+  body {
+    padding-top: calc(80px + env(safe-area-inset-top, 0)) !important;
   }
 
   .navbar-nav {
@@ -240,6 +276,42 @@ html {
 
   .navbar-brand {
     font-size: 1.4rem !important;
+  }
+
+  /* Ensure menu button is always visible */
+  .menu-button {
+    z-index: 100000 !important;
+    position: relative !important;
+  }
+
+  /* Fix mobile menu overlay */
+  .mobile-menu-overlay {
+    position: fixed !important;
+    top: calc(80px + env(safe-area-inset-top, 0)) !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    max-width: 300px !important;
+    background: rgba(5, 36, 83, 0.98) !important;
+    backdrop-filter: blur(12px) !important;
+    z-index: 99998 !important;
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+  }
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  .navbar-default {
+    position: fixed !important;
+    top: env(safe-area-inset-top, 0) !important;
+    height: calc(80px + env(safe-area-inset-top, 0)) !important;
+    z-index: 99999 !important;
+  }
+
+  .mobile-menu-overlay {
+    top: calc(80px + env(safe-area-inset-top, 0)) !important;
   }
 }
 
@@ -1224,4 +1296,19 @@ section[id] {
 /* Contact Section */
 #contact .col-md-4 {
   margin-top: 30px;
+}
+
+/* Ensure proper stacking context */
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fix for iOS Safari viewport height */
+.intro, 
+#header {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  height: 100vh;
+  height: -webkit-fill-available;
 }

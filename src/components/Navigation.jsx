@@ -111,22 +111,36 @@ export const Navigation = (props) => {
         backdropFilter: 'blur(12px)',
         boxShadow: scrolled ? '0 8px 32px rgba(0,0,0,0.1)' : 'none',
         transition: 'all 0.3s ease',
-        height: '80px',
-        padding: '0 5%',
-        borderBottom: `2px solid ${scrolled ? '#c4a43f55' : 'transparent'}`
+        height: 'calc(80px + env(safe-area-inset-top, 0))',
+        padding: `env(safe-area-inset-top, 0) 5% 0`,
+        borderBottom: `2px solid ${scrolled ? '#c4a43f55' : 'transparent'}`,
+        WebkitTransform: 'translateZ(0)',
+        transform: 'translateZ(0)',
+        WebkitBackfaceVisibility: 'hidden',
+        backfaceVisibility: 'hidden',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 99999
       }}
     >
       <div className="container" style={{ 
         maxWidth: '1400px',
         height: '100%',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: 'env(safe-area-inset-top, 0)',
+        position: 'relative',
+        zIndex: 100000
       }}>
         <div className="flex-space-between" style={{ 
           width: '100%',
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
+          position: 'relative',
+          zIndex: 100000
         }}>
           {/* Logo/Brand */}
           <div 
@@ -140,7 +154,9 @@ export const Navigation = (props) => {
               display: 'flex',
               alignItems: 'center',
               gap: '12px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              position: 'relative',
+              zIndex: 100000
             }}
           >
             <img 
@@ -157,7 +173,7 @@ export const Navigation = (props) => {
             <span className="brand-text">Nexus Academy</span>
           </div>
 
-          {/* Menu Button (visible on all screen sizes) */}
+          {/* Menu Button */}
           <button 
             onClick={(e) => {
               e.stopPropagation();
@@ -170,10 +186,10 @@ export const Navigation = (props) => {
               background: 'transparent',
               border: 'none',
               cursor: 'pointer',
-              zIndex: 1050,
+              zIndex: 100000,
               position: 'relative',
-              width: '40px',
-              height: '40px',
+              width: '44px',
+              height: '44px',
               padding: '0',
               display: 'flex',
               alignItems: 'center',
@@ -196,6 +212,23 @@ export const Navigation = (props) => {
                 exit={{ opacity: 0, x: '100%' }}
                 transition={{ duration: 0.3 }}
                 className="mobile-menu-overlay"
+                style={{
+                  position: 'fixed',
+                  top: `calc(80px + env(safe-area-inset-top, 0))`,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: 'rgba(5, 36, 83, 0.98)',
+                  backdropFilter: 'blur(12px)',
+                  zIndex: 99998,
+                  WebkitTransform: 'translateZ(0)',
+                  transform: 'translateZ(0)',
+                  WebkitBackfaceVisibility: 'hidden',
+                  backfaceVisibility: 'hidden',
+                  width: '100%',
+                  maxWidth: '300px',
+                  marginLeft: 'auto'
+                }}
               >
                 <div className="mobile-menu-content">
                   {navItems.map((item, index) => (
